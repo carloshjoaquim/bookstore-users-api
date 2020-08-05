@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-const(
+const (
 	errorNoRows = "no rows in result set"
 )
 
