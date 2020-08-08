@@ -1,6 +1,9 @@
 package app
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/carloshjoaquim/bookstore-users-api/logger"
+	"github.com/gin-gonic/gin"
+)
 
 var (
 	router = gin.Default() // Creates a new goroutine for each request.
@@ -8,5 +11,6 @@ var (
 
 func StartApplication() {
 	mapUrl()
+	logger.Info("Start the application...")
 	router.Run(":8080")
 }
