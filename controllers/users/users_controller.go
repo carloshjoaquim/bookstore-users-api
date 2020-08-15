@@ -1,6 +1,8 @@
 package users
 
+import "C"
 import (
+	"github.com/carloshjoaquim/bookstore-oauth-go/oauth"
 	"github.com/carloshjoaquim/bookstore-users-api/domain/users"
 	"github.com/carloshjoaquim/bookstore-users-api/services"
 	"github.com/carloshjoaquim/bookstore-users-api/utils/errors"
@@ -10,6 +12,11 @@ import (
 )
 
 func Get(c *gin.Context) {
+	if err := oauth.AuthenticateRequest(c.Request); err != nil {
+		c.JSON(err.Status, err)
+		return
+	}
+
 	userId, userErr := getUserId(c.Param("user_id"))
 	if userErr != nil {
 		c.JSON(userErr.Status, userErr)
@@ -22,7 +29,11 @@ func Get(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, result.Marshall(c.GetHeader("X-Public") == "true"))
+	if oauth.GetCallerId(c.Request) == result.Id  {
+		c.JSON(http.StatusOK, result.Marshall(false))
+		return
+	}
+	c.JSON(http.StatusOK, result.Marshall(oauth.IsPublic(c.Request)))
 }
 
 func Create(c *gin.Context) {
