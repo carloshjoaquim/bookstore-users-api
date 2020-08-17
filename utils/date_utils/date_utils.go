@@ -20,4 +20,3 @@ func GetNowString() string {
 func GetNowDBFormat() string {
 	return GetNow().Format(apiDbLayout)
 }
-

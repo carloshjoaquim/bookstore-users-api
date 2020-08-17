@@ -5,7 +5,6 @@ import (
 	"encoding/hex"
 )
 
-
 func GetMd5(input string) string {
 	hash := md5.New()
 	defer hash.Reset()
