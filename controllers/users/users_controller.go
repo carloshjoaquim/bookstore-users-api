@@ -1,11 +1,10 @@
 package users
 
-import "C"
 import (
-	"github.com/carloshjoaquim/bookstore-oauth-go/oauth"
 	"github.com/carloshjoaquim/bookstore-users-api/domain/users"
 	"github.com/carloshjoaquim/bookstore-users-api/services"
 	"github.com/carloshjoaquim/bookstore-users-api/utils/errors"
+	"github.com/carloshjoaquim/bookstore-oauth-go/oauth"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
